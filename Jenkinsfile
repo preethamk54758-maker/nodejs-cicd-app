@@ -47,9 +47,9 @@ pipeline {
 
     stage('Deploy to Kubernetes') {
       steps {
-        sh "/usr/bin/kubectl apply -f k8s/deployment.yaml"
-        sh "/usr/bin/kubectl apply -f k8s/service.yaml"
-        sh "/usr/bin/kubectl set image deployment/nodejs-app nodejs-app=${IMAGE_NAME}:${IMAGE_TAG}"
+       sh "/usr/local/bin/kubectl apply -f k8s/deployment.yaml"
+       sh "/usr/local/bin/kubectl apply -f k8s/service.yaml"
+       sh "/usr/local/bin/kubectl set image deployment/nodejs-app nodejs-app=${IMAGE_NAME}:${IMAGE_TAG}"
       }
     }
 
