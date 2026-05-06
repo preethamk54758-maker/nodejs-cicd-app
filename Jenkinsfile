@@ -5,6 +5,7 @@ pipeline {
     IMAGE_NAME = "preethamkmenon/nodejs-cicd-app"
     IMAGE_TAG  = "${BUILD_NUMBER}"
     DOCKERHUB_CREDS = credentials('dockerhub-creds')
+    PATH = "/usr/bin:/usr/local/bin:${env.PATH}"
   }
 
   stages {
@@ -46,11 +47,12 @@ pipeline {
 
     stage('Deploy to Kubernetes') {
       steps {
-        sh "kubectl apply -f k8s/deployment.yaml"
-        sh "kubectl apply -f k8s/service.yaml"
-        sh "kubectl set image deployment/nodejs-app nodejs-app=${IMAGE_NAME}:${IMAGE_TAG}"
+        sh "/usr/bin/kubectl apply -f k8s/deployment.yaml"
+        sh "/usr/bin/kubectl apply -f k8s/service.yaml"
+        sh "/usr/bin/kubectl set image deployment/nodejs-app nodejs-app=${IMAGE_NAME}:${IMAGE_TAG}"
       }
     }
+
   }
 
   post {
