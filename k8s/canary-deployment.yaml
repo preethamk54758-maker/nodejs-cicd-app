@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nodejs-app-canary
+spec:
+  replicas: 1           # 1 canary vs 3 stable = ~25% traffic
+  selector:
+    matchLabels:
+      app: nodejs-app   # Same label → same Service picks it up
+  template:
+    metadata:
+      labels:
+        app: nodejs-app
+    spec:
+      containers:
+      - name: nodejs-app
+        image: your-dockerhub-username/nodejs-cicd-app:NEW_TAG
+        ports:
+        - containerPort: 3000
