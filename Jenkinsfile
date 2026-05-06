@@ -5,7 +5,7 @@ pipeline {
     IMAGE_NAME = "preethamkmenon/nodejs-cicd-app"
     IMAGE_TAG  = "${BUILD_NUMBER}"
     DOCKERHUB_CREDS = credentials('dockerhub-creds')
-    PATH = "/usr/bin:/usr/local/bin:${env.PATH}"
+    PATH = "/usr/local/bin:/usr/bin:${env.PATH}"
   }
 
   stages {
